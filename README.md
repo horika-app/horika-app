@@ -2,7 +2,7 @@
 
 An iOS toy camera app
 
-https://omit.pro/apps/horika/
+https://omitlens.com/apps/horika/
 
 
 <a href="https://apps.apple.com/us/app/horika/id6746124840" class="app-store-button" target="_blank" rel="noopener">
