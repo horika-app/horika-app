@@ -1,0 +1,227 @@
+:root {
+    --page-bg: #0f1722;
+    --page-surface: #182232;
+    --page-border: rgba(255, 255, 255, 0.08);
+    --card-bg: #d4a040;
+    --card-text-primary: rgba(24, 20, 17, 0.95);
+    --card-text-secondary: rgba(24, 20, 17, 0.7);
+    --button-bg: #f8f8f8;
+    --button-fg: #111111;
+    --button-shadow: rgba(0, 0, 0, 0.28);
+    --secondary-bg: rgba(255, 255, 255, 0.14);
+    --secondary-border: rgba(255, 255, 255, 0.26);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, "Times New Roman", serif;
+    color: #f2f4f8;
+    background: var(--page-bg);
+    padding: 30px 16px 48px;
+}
+
+.back-nav {
+    max-width: 900px;
+    margin: 0 auto 28px;
+}
+
+.back-link {
+    display: inline-block;
+    color: #cdd5e3;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.back-link:hover {
+    color: #ffffff;
+}
+
+.page-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    display: grid;
+    gap: 28px;
+}
+
+.page-header {
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    text-align: center;
+    padding: 10px 0 2px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 8vw, 3.3rem);
+    line-height: 0.98;
+    font-weight: 400;
+    text-wrap: balance;
+}
+
+.card-shell {
+    width: min(100%, 560px);
+    margin: 0 auto;
+    border-radius: 28px;
+    background: var(--card-bg);
+    color: var(--card-text-primary);
+    padding: 30px 24px 26px;
+    box-shadow: 0 24px 56px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.brand-icon {
+    margin: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+}
+
+.card-title-group {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.card-title-group h2 {
+    margin: 0;
+    font-size: clamp(2rem, 7vw, 3rem);
+    line-height: 1.04;
+    font-weight: 400;
+    text-wrap: balance;
+}
+
+.card-title-group p {
+    margin: 12px auto 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 30ch;
+    color: var(--card-text-secondary);
+    text-wrap: pretty;
+}
+
+.qr-badge {
+    width: fit-content;
+    margin: 0 auto 2px;
+    background: #ffffff;
+    border-radius: 22px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+#qr-canvas {
+    display: block;
+    width: 224px;
+    height: 224px;
+}
+
+#qr-canvas canvas,
+#qr-canvas img {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.card-footer {
+    margin: 20px 0 0;
+    text-align: center;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 12px;
+    color: rgba(24, 20, 17, 0.52);
+}
+
+.actions {
+    width: min(100%, 560px);
+    margin: 0 auto;
+    display: grid;
+    gap: 14px;
+}
+
+.action-button,
+.secondary-button {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    min-height: 52px;
+    border-radius: 16px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.action-button {
+    background: var(--button-bg);
+    color: var(--button-fg);
+    box-shadow: 0 10px 24px var(--button-shadow);
+}
+
+.secondary-button {
+    background: var(--secondary-bg);
+    color: #eef2fb;
+    border: 1px solid var(--secondary-border);
+}
+
+.status-message {
+    margin: 0;
+    min-height: 22px;
+    text-align: center;
+    color: #cbd4e2;
+    font-size: 13px;
+    line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    text-wrap: pretty;
+}
+
+.app-store-section {
+    text-align: center;
+    margin-top: 2px;
+    padding: 20px 18px 0;
+    border-top: 1px solid var(--page-border);
+}
+
+.app-info {
+    margin: 10px 0 0;
+    color: #acb7c7;
+    font-size: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@media (max-width: 560px) {
+    body {
+        padding: 18px 12px 30px;
+    }
+
+    .card-shell {
+        padding: 24px 16px 22px;
+        border-radius: 22px;
+    }
+
+    .page-header h1 {
+        font-size: clamp(1.9rem, 12vw, 2.5rem);
+    }
+
+    .card-title-group {
+        margin-bottom: 18px;
+    }
+
+    .qr-badge {
+        padding: 12px;
+        border-radius: 16px;
+    }
+
+    #qr-canvas {
+        width: 188px;
+        height: 188px;
+    }
+}

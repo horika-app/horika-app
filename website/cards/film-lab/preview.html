@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Preview a Horika Film Lab share and open it in the app.">
+	<link rel="canonical" href="https://omitlens.com/apps/horika/film-lab/preview.html">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="OmitLens">
+	<meta property="og:title" content="Film Lab Preview - Horika">
+	<meta property="og:description" content="Preview a Horika Film Lab share and open it in the app.">
+	<meta property="og:url" content="https://omitlens.com/apps/horika/film-lab/preview.html">
+	<meta property="og:image" content="https://omitlens.com/apps/horika/images/horika.avif">
+	<title>Film Lab Preview - Horika</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<nav class="back-nav">
+		<a href="../../index.html" class="back-link">Horika Home</a>
+	</nav>
+
+	<main class="page-wrap">
+
+		<section class="card-shell" aria-label="Film Lab preview card">
+			<div class="card-title-group">
+				<h2 id="preset-name">Horika Film</h2>
+				<p id="preset-description">A shared Film Lab profile.</p>
+			</div>
+
+			<div class="qr-badge" aria-label="QR code for opening in Horika">
+				<div id="qr-canvas"></div>
+			</div>
+
+			<p class="card-footer">Scan the QR code or tap Open in Horika.</p>
+		</section>
+
+		<section class="actions" aria-label="Film Lab share actions">
+			<a id="open-in-app" href="horika://film-lab/" class="action-button">Open in Horika</a>
+			<button id="copy-link" class="secondary-button" type="button">Copy App Link</button>
+			<p id="status-message" class="status-message" role="status" aria-live="polite"></p>
+		</section>
+
+		<section class="app-store-section">
+			<p>
+				<img src="../../images/horika.avif" alt="Horika icon" class="brand-icon">
+			</p>
+			<p>
+				<a href="https://apps.apple.com/us/app/horika/id6746124840" target="_blank" rel="noopener"
+					class="app-store-link">
+					<img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+						alt="Download on the App Store" width="200" height="60">
+				</a>
+			</p>
+			<p class="app-info">Free • Offers In-App Purchases • iPhone</p>
+		</section>
+	</main>
+
+	<script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.9.2/lib/qr-code-styling.js"></script>
+	<script src="preview.js"></script>
+</body>
+
+</html>
