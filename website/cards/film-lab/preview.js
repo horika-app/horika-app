@@ -263,7 +263,9 @@
 	function attachActions(publicLink, schemeLink) {
 		console.log("[attachActions] Attaching actions for public link:", publicLink.substring(0, 50) + "...");
 
-		openInAppEl.href = publicLink;
+		openInAppEl.href = schemeLink;
+		openInAppEl.target = "_blank";
+		openInAppEl.rel = "noopener";
 
 		openInAppEl.addEventListener("click", function () {
 			console.log("[attachActions] Open in app clicked");
@@ -331,6 +333,20 @@
 		const hasValidData = isValidEncodedPayload(encodedData);
 		console.log("[start] Data validation result:", hasValidData);
 
+		// No film share data: show feature introduction blank state
+		if (encodedData.length === 0) {
+			console.log("[start] No data - showing blank state");
+			nameEl.textContent = "Film Lab";
+			descriptionEl.textContent = "Craft and share custom films.";
+			document.querySelector(".qr-badge").style.display = "none";
+			document.querySelector(".card-footer").style.display = "none";
+			document.querySelector(".actions").style.display = "none";
+			document.getElementById("blank-state-panel").hidden = false;
+			console.log("[start] Blank state rendering complete");
+			return;
+		}
+
+		// Malformed data: show error fallback
 		if (!hasValidData) {
 			console.log("[start] Invalid data - showing fallback");
 			setStatus("Invalid or missing share data. Install Horika to import shares from valid links.");
