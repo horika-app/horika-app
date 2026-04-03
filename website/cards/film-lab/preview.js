@@ -1,6 +1,8 @@
 (function () {
 	const APP_STORE_URL = "https://apps.apple.com/us/app/horika/id6746124840";
-	const FILM_LAB_PREFIX = "horika://film-lab/";
+	const FILM_LAB_PUBLIC_URL_BASE = "https://horika.omitlens.com/cards/film-lab/preview.html";
+	const FILM_LAB_SCHEME_PREFIX = "horika://film-lab/";
+	const FILM_LAB_QUERY_PARAM = "data";
 
 	console.log("[Init] Initializing preview.js");
 
@@ -29,7 +31,7 @@
 
 	function parseHashData() {
 		const queryParams = new URLSearchParams(window.location.search);
-		const queryData = queryParams.get("data") || "";
+		const queryData = queryParams.get(FILM_LAB_QUERY_PARAM) || "";
 		console.log("[parseHashData] Query param data:", queryData ? queryData.substring(0, 30) + "..." : "(empty)");
 
 		if (queryData) {
@@ -39,7 +41,7 @@
 
 		const hash = window.location.hash.startsWith("#") ? window.location.hash.substring(1) : "";
 		const hashParams = new URLSearchParams(hash);
-		const hashData = hashParams.get("data") || "";
+		const hashData = hashParams.get(FILM_LAB_QUERY_PARAM) || "";
 		console.log("[parseHashData] Hash param data:", hashData ? hashData.substring(0, 30) + "..." : "(empty)");
 
 		return hashData;
@@ -258,10 +260,10 @@
 		}
 	}
 
-	function attachActions(link) {
-		console.log("[attachActions] Attaching actions for link:", link.substring(0, 50) + "...");
+	function attachActions(publicLink, schemeLink) {
+		console.log("[attachActions] Attaching actions for public link:", publicLink.substring(0, 50) + "...");
 
-		openInAppEl.href = link;
+		openInAppEl.href = publicLink;
 
 		openInAppEl.addEventListener("click", function () {
 			console.log("[attachActions] Open in app clicked");
@@ -274,7 +276,7 @@
 		copyLinkEl.addEventListener("click", async function () {
 			console.log("[attachActions] Copy link clicked");
 			try {
-				await navigator.clipboard.writeText(link);
+				await navigator.clipboard.writeText(publicLink);
 				console.log("[attachActions] Link copied successfully");
 				setStatus("App link copied.");
 			} catch (error) {
@@ -340,9 +342,15 @@
 			return;
 		}
 
-		console.log("[start] Valid data found - decoding payload");
-		const deepLink = FILM_LAB_PREFIX + encodedData;
-		console.log("[start] Deep link:", deepLink.substring(0, 50) + "...");
+		console.log("[start] Valid data found - constructing public share URL");
+
+		// QR code encodes the public HTTPS Universal Link
+		const publicShareURL = FILM_LAB_PUBLIC_URL_BASE + "?" + FILM_LAB_QUERY_PARAM + "=" + encodedData;
+		console.log("[start] Public share URL:", publicShareURL.substring(0, 50) + "...");
+
+		// Fallback scheme-based link (for copy/legacy support)
+		const schemeLink = FILM_LAB_SCHEME_PREFIX + encodedData;
+		console.log("[start] Fallback scheme link:", schemeLink.substring(0, 50) + "...");
 
 		// Try native deflate decode first
 		let decoded = await decodePayloadWithDeflate(encodedData);
@@ -354,8 +362,8 @@
 		console.log("[start] Payload decode result:", decoded ? "Success" : "Failed");
 
 		renderFromPayload(encodedData, decoded, hashFields);
-		renderQRCode(deepLink);
-		attachActions(deepLink);
+		renderQRCode(publicShareURL);
+		attachActions(publicShareURL, schemeLink);
 
 		if (!decoded) {
 			setStatus("Preview uses shared style colors. Full profile opens in Horika.");

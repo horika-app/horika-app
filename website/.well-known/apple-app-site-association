@@ -1,0 +1,13 @@
+{
+	"applinks": {
+		"apps": [],
+		"details": [
+			{
+				"appID": "9ZFBFEYYFY.me.linjun.Holka",
+				"paths": [
+					"/cards/film-lab/preview.html*"
+				]
+			}
+		]
+	}
+}
